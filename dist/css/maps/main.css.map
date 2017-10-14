@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.scss"],"names":[],"mappings":"AACA,KAAK,iBAAA","file":"../main.css","sourcesContent":["@import \"includes/variables\";\nbody{background-color: $color}"]}
