@@ -5,10 +5,16 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 
+//JS
+const babel = require('gulp-babel');
+
 
 //Constants.
 const paths_css = './src/sass/**/*.scss';
 const dist_plugin_folder = './dist/';
+
+const paths_js = './src/js/**/*.js';
+
 
 //Sass. 
 gulp.task('sass', () => {
@@ -27,5 +33,22 @@ gulp.task('sass:watch', () => {
 });
 
 
+//JS
+gulp.task('js', () =>{
+    return gulp.src(paths_js)
+            .pipe(sourcemaps.init())
+            .pipe(babel({
+                presets: ['env']
+            }))
+            .pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest(dist_plugin_folder + '/js/'));
+
+});
+
+gulp.task('js:watch', () => {
+    return gulp.watch('./src/js/**/*', ['js']);
+});
+
+
 gulp.task('default', ['sass']);
-gulp.task('watch',['sass','sass:watch']);
+gulp.task('watch',['sass','sass:watch','js','js:watch']);
